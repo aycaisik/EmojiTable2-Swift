@@ -115,6 +115,24 @@ class EmojiTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        // Bu fonksiyon, TableView editing modundayken her hücrenin
+                // hangi tür editingStyle'a sahip olacağını belirtir.
+                return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            // indexPath: Editing aksiyonun gerçekleştiği hücrenin konumu.
+            // editingStyle: Gerçekleşen aksiyon. (.delete veya .insert)
+            
+            if editingStyle == .delete {
+                // Adım 1: 'emojis' array'İnden indexPath.row'da bulunan objeyi sil.
+                emojis.remove(at: indexPath.row)
+                
+                // Adım 2: TableView'a hücrenin silinmesi gerektiği bilgisi verilir...
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
     //MARK: - Actions
     
     //move row at yazdık çıktı.
