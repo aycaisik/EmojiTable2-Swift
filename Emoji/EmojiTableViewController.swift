@@ -91,11 +91,13 @@ class EmojiTableViewController: UITableViewController {
         
         //Adım 2 : Hücre oluşturmak.
         //ReuseIdentifier: Storyboard'da hücre için verdiğiniz identifier değeri.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EmojiCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EmojiCell")! as! EmojiTableViewCell
+        //as! ekledik. yeni app için.
         
         //Adım 3: Hücreyi data ile doldurmak.
-        cell.textLabel?.text = "\(emoji.symbol)- \(emoji.name)" //Title
-        cell.detailTextLabel?.text = "\(emoji.description)" //Subtitle
+        cell.update(with: emoji)
+        //cell.textLabel?.text = "\(emoji.symbol)- \(emoji.name)" //Title
+        //cell.detailTextLabel?.text = "\(emoji.description)" //Subtitle
         
         return cell
         
