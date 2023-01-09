@@ -23,6 +23,14 @@ class NewEmojiTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Önceki sayfadan bir emoji nesnesi iletildiyse..
+        if let emoji = emoji{
+            symbolTextField.text = emoji.symbol
+            nameTextField.text = emoji.name
+            descriptionTextField.text = emoji.description
+            usageTextField.text = emoji.usage
+            
+        }
     }
     
     //MARK: - Functions

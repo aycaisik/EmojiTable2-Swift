@@ -61,6 +61,24 @@ class EmojiTableViewController: UITableViewController {
         super.viewDidLoad()
     
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toEditEmoji"{
+            //O an seçili olan hücrenin indexine ulaştık.
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
+            //O an seçili olan index ile emojis arrayinden gerekli olan objeye ulaşılır.
+            let selectedEmoji  = emojis[selectedIndexPath.row]
+            
+            //Seguenin storyboardda bağlı olduğu yer bir navigation controllerdır... destination gösterdiği yer gibi hedef..
+            let navigationController = segue.destination as! UINavigationController
+            
+            //NavigationControllerın RootviewController(kendisinin bağlı oldugu ilk sayfa) ulaşılır.
+            let editEmojiController = navigationController.topViewController as! NewEmojiTableViewController
+            
+            //Gidilecek sayfada bulunan emoji doldurulur.
+            editEmojiController.emoji = selectedEmoji
+        }
+        
+    }
 
     // MARK: - Table view data source
 
@@ -111,6 +129,8 @@ class EmojiTableViewController: UITableViewController {
         //Bu fonksiyon, kullanıcı hücrenizi seçtiği zaman(üstüne tıkladığı zaman)çalışır.
         //indexPath'in row propertysini kullanarak üstüne tıklanılan emojiye ulaşılır.
         let selectedEmoji = emojis[indexPath.row]
+        //Storyboardda toeditemoji adına sahip olan segue çalıştırılır.
+        performSegue(withIdentifier: "toEditEmoji", sender: nil)
         print("\(selectedEmoji.symbol)\(indexPath)")
         
     }
